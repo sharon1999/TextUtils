@@ -1,15 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Navbar = ({title}) => {
-const[mode,setMode] = useState('dark')
-const toggleMode = () =>{
-  if(mode === 'light'){
-    setMode('dark')
-  }
-  else{ 
-    setMode('light')
-  }
-}
+const Navbar = ({title,mode,toggleMode}) => {
+
   return (
     <div>
       <nav className={`navbar navbar-expand-lg navbar-${mode} bg-${mode}`}>
