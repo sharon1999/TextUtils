@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function TextArea({ mode,showAlert }) {
+function TextArea({ mode, showAlert }) {
   const [text, setText] = useState("");
 
   const changeInput = (e) => {
@@ -9,12 +9,12 @@ function TextArea({ mode,showAlert }) {
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
-    showAlert("Converted to Uppercase","success")
-};
-const handleLoClick = () => {
+    showAlert("Converted to Uppercase", "success");
+  };
+  const handleLoClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
-    showAlert("Converted to Lowercase","success")
+    showAlert("Converted to Lowercase", "success");
   };
   return (
     <>
@@ -32,6 +32,7 @@ const handleLoClick = () => {
           rows="8"
         ></textarea>
         <button
+          disabled={text.length == 0}
           type="button"
           onClick={handleUpClick}
           className="btn btn-primary my-2 mx-1"
@@ -39,6 +40,7 @@ const handleLoClick = () => {
           Upper case
         </button>
         <button
+          disabled={text.length == 0}
           type="button"
           onClick={handleLoClick}
           className="btn btn-primary my-2 mx-1"
@@ -49,9 +51,16 @@ const handleLoClick = () => {
       <div className="container">
         <h2>Summary of words</h2>
         <p>
-          {text.split(" ").length - 1} words and {text.length} characters
+          {
+            text.split("\s+/").filter((element) => {
+              return element.length !== 0;
+            }).length
+          }
+           words and {text.length} characters
         </p>
-        <p>{0.008 * text.split(" ").length}min read</p>
+        <p>{0.008 *text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}min read</p>
         <h2>Preview</h2>
         <p>{text}</p>
       </div>
